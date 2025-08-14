@@ -7,6 +7,7 @@ from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
+from launch.conditions import IfCondition
 
 from launch_ros.actions import Node
 
@@ -45,7 +46,13 @@ def generate_launch_description():
         get_package_share_directory(package_name),
         'worlds',
         'empty.world'
-        )    
+        )   
+
+    rviz_file = os.path.join(
+        get_package_share_directory(package_name),
+        'worlds',
+        'my_rviz.rviz'
+        )   
     
     world = LaunchConfiguration('world')
 
@@ -100,6 +107,12 @@ def generate_launch_description():
         arguments=["/camera/image_raw"]
     )
 
+    rviz = Node(
+       package='rviz2',
+       executable='rviz2',
+       arguments=['-d', rviz_file],
+       condition=IfCondition(LaunchConfiguration('rviz'))
+    )
 
 
     # Code for delaying a node (I haven't tested how effective it is)
@@ -122,6 +135,8 @@ def generate_launch_description():
 
     # Launch them all!
     return LaunchDescription([
+        DeclareLaunchArgument('rviz', default_value='true',
+                              description='Open RViz.'),
         rsp,
         joystick,
         twist_mux,
@@ -131,5 +146,6 @@ def generate_launch_description():
         diff_drive_spawner,
         joint_broad_spawner,
         ros_gz_bridge,
-        ros_gz_image_bridge
+        ros_gz_image_bridge,
+        rviz
     ])

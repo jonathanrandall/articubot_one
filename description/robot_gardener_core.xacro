@@ -48,7 +48,7 @@
     <link name="${name}">
       <!-- <inertial> -->
         <xacro:inertial_box mass="${mass}" x="${depth}" y="${width}" z="${height}">
-          <origin xyz="0 0 ${height/2}" rpy="0 0 0"/>
+          <origin xyz="${depth/2} 0 ${height/2}" rpy="0 0 0"/>
         </xacro:inertial_box>
       <!-- </inertial> -->
       <visual>
@@ -56,10 +56,11 @@
         <geometry>
           <box size="${depth} ${width} ${height}"/>
         </geometry>
-        <material>
+        <material name="red"/>
+        <!-- <material>
           <ambient>0.6 0.6 0.6 1.0</ambient>
           <diffuse>0.6 0.6 0.6 1.0</diffuse>
-        </material>
+        </material> -->
       </visual>
       <collision>
         <origin xyz="${depth/2} 0 ${height/2}" rpy="0 0 0"/>
@@ -161,14 +162,15 @@
   <xacro:set_gazebo_color link_name="left_rear_wheel" color_name="Red"/>
   <xacro:set_gazebo_color link_name="right_front_wheel" color_name="Blue"/>
   <xacro:set_gazebo_color link_name="right_rear_wheel" color_name="Red"/>
+  
 
 
   <!-- Shelves -->
-  <!-- <xacro:shelf_link name="shelf1"
+  <xacro:shelf_link name="shelf1"
                     width="${shelf1_width}"
                     depth="${shelf1_depth}"
                     height="${shelf1_height}"
-                    mass="${shelf_mass}"/> -->
+                    mass="${shelf_mass}"/>
   <!-- <xacro:shelf_link name="shelf2"
                     width="${shelf2_width}"
                     depth="${shelf2_depth}"
@@ -185,11 +187,12 @@
   <!-- ===================== -->
 
   <!-- Shelves fixed to chassis -->
-  <!-- <joint name="shelf1_joint" type="fixed">
-    <parent link="base_link"/>
+  <joint name="shelf1_joint" type="fixed">
+    <parent link="chassis"/>
     <child link="shelf1"/>
     <origin xyz="-${chassis_length/2} 0 ${chassis_height}"/>
-  </joint> -->
+  </joint>
+  <xacro:set_gazebo_color link_name="shelf1" color_name="Red"/>
   <!-- <joint name="shelf2_joint" type="fixed">
     <parent link="base_link"/>
     <child link="shelf2"/>

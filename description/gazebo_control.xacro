@@ -36,8 +36,10 @@
         <plugin filename="gz-sim-joint-state-publisher-system"
             name="gz::sim::systems::JointStatePublisher">
             <topic>joint_states</topic>
-            <joint_name>left_wheel_joint</joint_name>
-            <joint_name>right_wheel_joint</joint_name>
+            <left_joint>left_front_wheel_joint</left_joint>
+            <left_joint>left_rear_wheel_joint</left_joint>
+            <right_joint>right_front_wheel_joint</right_joint>
+            <right_joint>right_rear_wheel_joint</right_joint>
         </plugin>
     </gazebo>
 

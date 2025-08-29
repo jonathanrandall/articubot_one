@@ -73,7 +73,8 @@ def generate_launch_description():
     spawn_entity = Node(package='ros_gz_sim', executable='create',
                         arguments=['-topic', 'robot_description',
                                    '-name', 'my_bot',
-                                   '-z', '0.1'],
+                                   '-z', '0.1',
+                                   '-Y', '3.14159'],
                         output='screen')
 
 
@@ -81,6 +82,12 @@ def generate_launch_description():
         package="controller_manager",
         executable="spawner",
         arguments=["diff_cont"],
+    )
+
+    xarm_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["hiwonder_xarm_controller"],
     )
 
     joint_broad_spawner = Node(
@@ -145,6 +152,7 @@ def generate_launch_description():
         spawn_entity,
         diff_drive_spawner,
         joint_broad_spawner,
+        xarm_spawner,
         ros_gz_bridge,
         ros_gz_image_bridge,
         rviz

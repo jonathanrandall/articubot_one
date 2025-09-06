@@ -170,7 +170,6 @@
                 <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
             </inertial>
         </link>
-       
 
         <link name="eef_2_finger_left_link">
             <visual>
@@ -192,9 +191,6 @@
             </inertial>
         </link>
 
-         <!-- mirror here -->
-
-        <xacro:if value="$(arg sim_mode)">
         <link name="eef_2_finger_right_link">
             <visual>
                 <origin rpy="0 0 0" xyz="0.0 0.0 0.0" />
@@ -214,7 +210,6 @@
                 <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
             </inertial>
         </link>
-        </xacro:if>
     </xacro:if>
 
     <xacro:if value="${eef == 'eef_3_finger'}">
@@ -388,9 +383,6 @@
             <child link="eef_2_finger_left_link"/>
         </joint>
 
-        <!-- mirror here -->
-
-        <xacro:if value="$(arg sim_mode)">
         <joint name="xarm_1_joint_mirror" type="prismatic">
             <origin rpy="0 0 0" xyz="0 0 0.050"/>
             <axis xyz="1 0 0" />
@@ -399,8 +391,6 @@
             <child link="eef_2_finger_right_link"/>
             <mimic multiplier="-1.0" joint="xarm_1_joint" />
         </joint>
-        </xacro:if>
-       
     </xacro:if>
 
     <xacro:if value="${eef == 'eef_3_finger'}">

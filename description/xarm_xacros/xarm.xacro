@@ -8,7 +8,7 @@
     <!-- <xacro:property name="eef" value="eef_3_finger"/> -->
     <xacro:property name="eef" value="eef_2_finger"/>
     <xacro:arg name="sim_mode" default="true"/>
-    <!-- <xacro:include filename="$(find articubot_one)/description/robot_dimensions.xacro"/> -->
+    <!-- <xacro:include filename="$(find autonomous_robot)/description/robot_dimensions.xacro"/> -->
 
     <!-- <xacro:include filename="$(find xarm_description)/urdf/xarm.urdf"/> -->
     <xacro:include filename="xarm_v2.urdf"/>
